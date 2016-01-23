@@ -1,0 +1,24 @@
+﻿@model Sonovate.BackEnd.ViewModels.SettingViewModel
+
+@{
+    ViewBag.Title = "New Configuration";
+    ViewBag.Subtitle = $"Editing {Model.Setting.Route}";
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.Setting.Id)
+
+    @Html.EditorForModel()
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/lib/editor")
+}
+
