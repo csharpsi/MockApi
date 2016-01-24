@@ -1,0 +1,51 @@
+﻿@using Humanizer
+@model System.Collections.Generic.List<MockApi.Web.Models.Setting>
+
+@{
+    ViewBag.Title = "Configuration";
+}
+
+<h2>Route Settings</h2>
+
+@Html.ActionLink("Add new route", "Create", null, new {@class = "btn btn-primary"})
+
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Route</th>
+        <th>Method</th>
+        <th>Responds with</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var route in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.ActionLink(route.Route, "Edit", new {id = route.Id})
+            </td>
+            <td>@route.HttpMethod.ToString()</td>
+            <td>@route.StatusCode.ToString().Humanize().Transform(To.TitleCase) (@((int) route.StatusCode))</td>
+            <th>
+                <a href="@Url.Action("Edit", new {id = route.Id})" title="Edit this route setting">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </a>
+            </th>
+            <td>
+                <a href="@Url.Action("Remove", new {id = route.Id})" title="Delete this route setting">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            </td>
+            <td>
+                <a href="@Url.Action("Copy", new {id = route.Id})" title="Copy this route setting">
+                    <span class="glyphicon glyphicon-duplicate"></span>
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
