@@ -27,7 +27,21 @@ If you add a route `/users/{id}`, with a response status code of `OK (200)`, a H
 }
 ```
 
-Then when you make a request to `GET http://localhost:51680/users/123` and you will get the JSON payload exactly as you entered it. This works by using an variation of the [Dice Coefficient Algorithm](https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient) to fuzzy match routes when url parameters are used.
+Then make a request to `GET http://localhost:51680/users/123` and you will get the JSON payload exactly as you entered it. This works by using an variation of the [Dice Coefficient Algorithm](https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient) to fuzzy match routes when url parameters are used.
+
+### Supported HTTP Methods
+
+The following HTTP methods are supported:
+* GET
+* PUT
+* POST
+* DELETE
+
+#### POST and PUT methods
+
+The request body is ignored when using POST and PUT HTTP methods. In order to test the API endpoints, I recommend using the chrome app [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en).
+
+
 
 ### Changing the expected status code
 
