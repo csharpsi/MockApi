@@ -1,0 +1,18 @@
+﻿@model MockApi.Web.Models.Mock
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Add a new mock</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel()
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

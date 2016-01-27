@@ -6,6 +6,6 @@ namespace MockApi.Web.Data
 {
     public interface IDataSession : IDisposable
     {
-        LiteCollection<Setting> Settings { get; }
+        LiteCollection<Mock> Mocks { get; } 
     }
 }

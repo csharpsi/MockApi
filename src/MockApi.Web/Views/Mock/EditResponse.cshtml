@@ -1,0 +1,20 @@
+﻿@model MockApi.Web.ViewModels.MockResponseViewModel
+
+@{
+    ViewBag.Title = "EditResponse";
+}
+
+<h2>Edit Response</h2>
+<p>Edit the @Model.MockResponse.StatusCode.ToFriendlyString() response code for the path [@Model.Mock.Verb.ToString().ToUpper()] @Model.Mock.Path</p>
+
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel()
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/lib/editor")
+}
+

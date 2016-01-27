@@ -9,9 +9,9 @@
 
     $(function() {
 
-        $("#Setting_Route").focus();
+        $("#Mock_Path").focus();
 
-        var textarea = $("#Setting_ResponseJson");
+        var textarea = $(".editor");
 
         textarea.ace({ theme: "github", lang: "json" });
 

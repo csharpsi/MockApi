@@ -26,5 +26,12 @@ textarea {
 
 .editor {
     width: 100%;
-    max-width: 700px;
+}
+
+table.table tr td:last-child {
+    text-align: right;
+}
+
+.space {
+    margin: 0 15px;
 }

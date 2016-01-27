@@ -15,7 +15,7 @@ namespace MockApi.Web
 
             container
                 .RegisterType<IDataContext, DataContext>(new InjectionConstructor(HostingEnvironment.MapPath("~/App_Data/MockApi.db")))
-                .RegisterType<ISettingRepository, SettingRepository>(new InjectionConstructor(typeof(IDataContext)));
+                .RegisterType<IMockRepository, MockRepository>(new InjectionConstructor(typeof(IDataContext)));
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

@@ -9,6 +9,7 @@ namespace MockApi.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("Mocks", "mocks/{action}/{id}", new {controller = "Mock", action = "Index", id = UrlParameter.Optional});
             routes.MapRoute("Settings", "settings/{action}/{id}", new {controller = "Settings", action = "Index", id = UrlParameter.Optional});
 
             routes.MapRoute("CatchAll", "{*url}", new { controller = "WebApp", action = "Index" });

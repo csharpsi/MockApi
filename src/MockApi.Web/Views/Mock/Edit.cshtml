@@ -1,0 +1,17 @@
+﻿@model MockApi.Web.Models.Mock
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit settings for the mock path @Model.Path</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel()
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

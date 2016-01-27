@@ -9,20 +9,20 @@ namespace MockApi.Web.Controllers
 {
     public class WebAppController : Controller
     {
-        private readonly ISettingRepository settingRepository;
+        private readonly IMockRepository mockRepository;
 
-        public WebAppController(ISettingRepository settingRepository)
+        public WebAppController(IMockRepository mockRepository)
         {
-            this.settingRepository = settingRepository;
+            this.mockRepository = mockRepository;
         }
 
-        public ActionResult Index(string url, HttpStatusCode status = HttpStatusCode.OK)
+        public ActionResult Index(string url)
         {
             url = url ?? "/";
 
             if (url == "/")
             {
-                return RedirectToAction("Index", "Settings");
+                return RedirectToAction("Index", "Mock");
             }
 
             if (!url.StartsWith("/"))
@@ -32,41 +32,18 @@ namespace MockApi.Web.Controllers
 
             var method = GetHttpMethod();
 
-            var route = settingRepository.FindRoute(url, status, method);
-
-            Response.StatusCode = (int)status;
+            var route = mockRepository.FindActiveResponse(url, method);
 
             if (route == null)
             {
-                return TryFuzzyFind(url, status, method);
-            }
-
-            return Content(route.ResponseJson, "application/json");
-        }
-
-        private ActionResult TryFuzzyFind(string url, HttpStatusCode statusCode, HttpMethodType httpMethod)
-        {
-            var routes = settingRepository.FindAllParameterisedRoutes(statusCode, httpMethod);
-
-            var matches = (from route in routes
-                let distance = route.Route.DiceCoefficient(url)
-                where distance > .6d
-                select new {Route = route, Distance = distance}).ToList();
-
-            if (!matches.Any())
-            {
                 Response.StatusCode = 404;
-                var error = new {error = $"Cannot find route config that matches {Request.HttpMethod.ToUpper()} '{url}' for the status code '{statusCode}'"};
+                var error = new { error = $"Cannot find route config that matches {Request.HttpMethod.ToUpper()} '{url}'" };
                 return Json(error, JsonRequestBehavior.AllowGet);
             }
 
-            if (matches.Count > 1)
-            {
-                throw new DuplicateNameException($"The given url '{url}' was a fuzzy match to {matches.Count} routes.");
-            }
+            Response.StatusCode = (int)route.StatusCode;
 
-            var content = matches.First().Route.ResponseJson;
-            return Content(content, "application/json");
+            return Content(route.Data, "application/json");
         }
 
         private HttpMethodType GetHttpMethod()

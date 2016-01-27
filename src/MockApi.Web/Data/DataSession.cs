@@ -15,6 +15,6 @@ namespace MockApi.Web.Data
 
         public void Dispose() => database?.Dispose();
 
-        public LiteCollection<Setting> Settings => database?.GetCollection<Setting>(nameof(Setting).Pluralize().ToLower());
+        public LiteCollection<Mock> Mocks => database?.GetCollection<Mock>(nameof(Mock).Pluralize().ToLower());
     }
 }
