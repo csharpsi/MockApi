@@ -1,6 +1,8 @@
 # Mock API
 #### The backend mocking application.
 
+## This README is out of date
+
 This web app is designed to help front end developers build out their code using a real API backend which is completley configurable. You simply add the path to your API call (e.g. `/people/{id}`), the HTTP Method (e.g. `GET`) and the status code you want the backend to respond with (e.g. `OK` or `200`) and MockAPI will give you the response body you told it to as `application/json`.
 
 ### Set up
