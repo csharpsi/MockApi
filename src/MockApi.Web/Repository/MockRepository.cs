@@ -56,11 +56,12 @@ namespace MockApi.Web.Repository
                 if (mock == null)
                 {
                     var routeMatch = Query.And(Query.Contains(Path, "{"), Query.Contains(Path, "}"));
-                    var routes = session.Mocks.Find(Query.And(routeMatch, Query.EQ(Verb, verb.ToString())));
+                    var routes = session.Mocks.Find(Query.And(routeMatch, Query.EQ(Verb, verb.ToString()))).ToList();
 
                     var fuzzyMock = (from route in routes
-                                     where route.Path.DiceCoefficient(path) > .6d
-                                     select route).SingleOrDefault();
+                                     let co = route.Path.DiceCoefficient(path)
+                                     orderby co descending 
+                                     select route).FirstOrDefault();
 
                     if (fuzzyMock == null)
                     {

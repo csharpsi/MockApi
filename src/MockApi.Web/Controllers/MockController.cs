@@ -50,7 +50,7 @@ namespace MockApi.Web.Controllers
 
             mockRepository.Create(mock);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", new {id = mock.Id});
         }
 
         [HttpGet]

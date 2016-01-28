@@ -25,7 +25,10 @@
     <div class="form-group">
         <div class="col-lg-12">
             <button type="submit" class="btn btn-success">Save</button>
-            @Html.ActionLink("Add new response", "NewResponse", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            @if (!string.IsNullOrWhiteSpace(Model.Id?.ToString()))
+            {
+                @Html.ActionLink("Add new response", "NewResponse", new { id = Model.Id }, new { @class = "btn btn-primary" })
+            }
             @Html.ActionLink("Back to List", "Index")
         </div>
     </div>
